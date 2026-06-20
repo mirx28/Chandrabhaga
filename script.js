@@ -481,7 +481,7 @@ document.addEventListener("DOMContentLoaded", () => {
       scrubCurrent = scrubTarget;
     } else {
       // Small movement — lerp smoothly
-      scrubCurrent += diff * 0.12;
+      scrubCurrent += diff * 0.08;
     }
 
     const t = scrubCurrent * scrubVideo.duration;
@@ -698,19 +698,94 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ===================================================================
-  // GALLERY PARALLAX
-  // ===================================================================
-  [
-    { id: "#about-imgs-col-1", y: -500 },
-    { id: "#about-imgs-col-2", y: -250 },
-    { id: "#about-imgs-col-3", y: -250 },
-    { id: "#about-imgs-col-4", y: -500 },
-  ].forEach(({ id, y }) => {
-    gsap.to(id, {
-      y,
-      scrollTrigger: { trigger: ".about", start: "top bottom", end: "bottom top", scrub: true },
-    });
-  });
+// INTERIOR SCRUB
+// ===================================================================
+const INTERIOR_CHAPTERS = [
+  { sec: 0,  title: "The Living Room", dim: "STONE \u00B7 GLASS \u00B7 NATURAL LIGHT" },
+  { sec: 24, title: "The Dining Area", dim: "OPEN PLAN \u00B7 RIVER VIEWS" },
+  { sec: 48, title: "The Interior",    dim: "VILLA CHANDRABHAGA \u00B7 RISHIKESH" },
+];
+
+const interiorVideo = document.querySelector(".interior-video");
+const interiorChaptersWrap = document.querySelector(".interior-chapters");
+const interiorIntro = document.querySelector(".interior-intro");
+
+const interiorChapterEls = INTERIOR_CHAPTERS.map((ch) => {
+  const el = document.createElement("div");
+  el.className = "interior-chapter";
+  el.innerHTML = `<h3>${ch.title}</h3><p>${ch.dim}</p>`;
+  interiorChaptersWrap.appendChild(el);
+  return el;
+});
+
+let interiorTarget = 0;
+let interiorCurrent = 0;
+let interiorActiveChapter = -1;
+let interiorIntroHidden = false;
+
+ScrollTrigger.create({
+  trigger: ".interior",
+  start: "top top",
+  end: "+=6120",
+  pin: ".interior-pin",
+  scrub: true,
+  onUpdate: (self) => {
+    interiorTarget = self.progress;
+
+    if (self.progress > 0.03 && !interiorIntroHidden) {
+      interiorIntroHidden = true;
+      gsap.to(interiorIntro, { opacity: 0, y: -30, duration: 0.5, ease: "power2.out" });
+    } else if (self.progress <= 0.03 && interiorIntroHidden) {
+      interiorIntroHidden = false;
+      gsap.to(interiorIntro, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
+    }
+
+    const dur = interiorVideo.duration && isFinite(interiorVideo.duration) ? interiorVideo.duration : 0;
+    if (dur) {
+      const t = self.progress * dur;
+      let idx = 0;
+      for (let i = 0; i < INTERIOR_CHAPTERS.length; i++) {
+        if (t >= INTERIOR_CHAPTERS[i].sec) idx = i;
+      }
+      if (self.progress < 0.015) idx = -1;
+
+      if (idx !== interiorActiveChapter) {
+        interiorChapterEls.forEach((el) => gsap.killTweensOf(el));
+        if (interiorActiveChapter >= 0) {
+          gsap.set(interiorChapterEls[interiorActiveChapter], { opacity: 0, y: -18 });
+        }
+        if (idx >= 0) {
+          gsap.fromTo(
+            interiorChapterEls[idx],
+            { opacity: 0, y: 24 },
+            { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }
+          );
+        }
+        interiorActiveChapter = idx;
+      }
+    }
+  },
+});
+
+gsap.ticker.add(() => {
+  if (!interiorVideo.duration || interiorVideo.readyState < 2) return;
+  const diff = interiorTarget - interiorCurrent;
+  if (Math.abs(diff) > 0.08) {
+    interiorCurrent = interiorTarget;
+  } else {
+    interiorCurrent += diff * 0.08;
+  }
+  const t = interiorCurrent * interiorVideo.duration;
+  if (Math.abs(interiorVideo.currentTime - t) > 0.016) {
+    interiorVideo.currentTime = t;
+  }
+});
+
+interiorVideo.addEventListener("loadeddata", () => { interiorVideo.currentTime = 0.001; });
+interiorVideo.addEventListener("loadedmetadata", () => { ScrollTrigger.refresh(); });
+interiorVideo.preload = "auto";
+interiorVideo.load();
+interiorVideo.playbackRate = 0;
 
   // ===================================================================
   // FILMS — horizontal cinema reel
@@ -727,7 +802,7 @@ document.addEventListener("DOMContentLoaded", () => {
       start: "top top",
       end: () => `+=${getFilmsDistance()}`,
       pin: ".films-pin",
-      scrub: 0.6,
+      scrub: 1,
       invalidateOnRefresh: true,
     },
   });
