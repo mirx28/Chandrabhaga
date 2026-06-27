@@ -71,9 +71,6 @@ if (window.gsap) {
 // EDITABLE DATA — change text here, no need to touch the logic below
 // =====================================================================
 
-// Chapters for the scroll-scrubbed walkthrough.
-// `sec` = the moment in the film (in SECONDS) where the chapter begins.
-// Edit these numbers any time — they map directly to your video timeline.
 const CHAPTERS = [
   { sec: 0,  title: "The Arrival",            dim: "GUEST & STAFF ENTRY \u00B7 ACCESS ROAD" },
   { sec: 4,  title: "The Motor Court",        dim: "PRIVATE PARKING \u00B7 TREE-LINED APPROACH" },
@@ -87,9 +84,6 @@ const CHAPTERS = [
   { sec: 87, title: "Welcome To Your Future", dim: "VILLA CHANDRABHAGA \u00B7 RISHIKESH, UTTARAKHAND" },
 ];
 
-// Zones for the interactive isometric estate model.
-// Units are plan-units (the plot is roughly 104 × 70). Each zone is a
-// stack of boxes: { x, y, w, d, h, z (base height), c (color set) }.
 const C = {
   stone:  { top: "#e9e5dc", left: "#c6c0b2", right: "#b2ab9c" },
   white:  { top: "#f5f2ea", left: "#d4cec0", right: "#bfb8a8" },
@@ -197,7 +191,6 @@ const ZONES = [
 // MAIN
 // =====================================================================
 document.addEventListener("DOMContentLoaded", () => {
-  // ---- Boot check: report exactly which library failed to load ----
   const missing = [];
   if (!window.gsap) missing.push("gsap.min.js");
   if (!window.ScrollTrigger) missing.push("ScrollTrigger.min.js");
@@ -213,7 +206,6 @@ document.addEventListener("DOMContentLoaded", () => {
     showMsg("Files that failed to load:\n  - " + window.__failedResources.join("\n  - "));
   }
   if (!window.gsap || !window.ScrollTrigger) {
-    // Can't animate at all — show the page plainly instead of a dead screen.
     killPreloader();
     return;
   }
@@ -221,14 +213,14 @@ document.addEventListener("DOMContentLoaded", () => {
   try {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // ---- Smooth scroll (optional — site works natively without it) ----
+  // ---- Smooth scroll ----
   let lenis = null;
   if (window.Lenis) {
-   lenis = new Lenis({ duration: 1.6, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+    lenis = new Lenis({ duration: 1.6, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
     lenis.on("scroll", ScrollTrigger.update);
     gsap.ticker.add((time) => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
-    lenis.stop(); // locked until the preloader finishes
+    lenis.stop();
   }
 
   document.querySelectorAll('a[href^="#"]').forEach((a) => {
@@ -242,16 +234,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ---- Per-video diagnostics: name the file AND the reason ----
-  // Diagnostics disabled — using Cloudinary CDN
-
   // ===================================================================
-  // PRELOADER — gold line + counter, then reveal
+  // PRELOADER
   // ===================================================================
   const counter = { v: 0 };
   const countEl = document.querySelector(".preloader-count");
 
-  // Wrap hero title lines for the masked reveal
   document.querySelectorAll(".hero-title .line").forEach((line) => {
     line.innerHTML = `<span class="line-in" style="display:block">${line.innerHTML}</span>`;
   });
@@ -283,7 +271,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .to(".nav, .audio-toggle", { opacity: 1, duration: 0.8, ease: "power2.out" }, "-=0.6");
 
   // ===================================================================
-  // AMBIENT AUDIO — starts on first interaction, toggle to mute
+  // AMBIENT AUDIO
   // ===================================================================
   const ambient = document.querySelector(".ambient");
   const audioBtn = document.querySelector(".audio-toggle");
@@ -310,23 +298,23 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ===================================================================
-  // HERO — gentle parallax out
+  // HERO
   // ===================================================================
   gsap.to(".hero-media", {
     yPercent: 14,
     scale: 1.06,
     ease: "none",
-    scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true },
+    scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 1 },
   });
   gsap.to(".hero-content", {
     opacity: 0,
     y: -60,
     ease: "none",
-    scrollTrigger: { trigger: ".hero", start: "top top", end: "60% top", scrub: true },
+    scrollTrigger: { trigger: ".hero", start: "top top", end: "60% top", scrub: 1 },
   });
 
   // ===================================================================
-  // STORY — words ignite as you scroll
+  // STORY
   // ===================================================================
   if (window.SplitText) {
     const storySplit = SplitText.create(".story-text", { type: "words", wordsClass: "word" });
@@ -335,7 +323,7 @@ document.addEventListener("DOMContentLoaded", () => {
         trigger: ".story",
         start: "top top",
         end: "bottom bottom",
-        scrub: 0.5,
+        scrub: 1,
         pin: ".story-pin",
       },
     })
@@ -348,7 +336,7 @@ document.addEventListener("DOMContentLoaded", () => {
         trigger: ".story",
         start: "top top",
         end: "bottom bottom",
-        scrub: 0.5,
+        scrub: 1,
         pin: ".story-pin",
       },
     })
@@ -357,7 +345,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ===================================================================
-  // SHOWCASE — film grows from a card to fullscreen
+  // SHOWCASE
   // ===================================================================
   const showcaseVideo = document.querySelector(".showcase-frame video");
 
@@ -384,14 +372,13 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ===================================================================
-  // SCRUBBED WALKTHROUGH — scroll drives the camera
+  // SCRUBBED WALKTHROUGH
   // ===================================================================
   const scrubVideo = document.querySelector(".scrub-video");
   const chaptersWrap = document.querySelector(".scrub-chapters");
   const progressFill = document.querySelector(".scrub-progress-fill");
   const progressLabel = document.querySelector(".scrub-progress-label");
 
-  // Build chapter elements from the CHAPTERS array
   const chapterEls = CHAPTERS.map((ch) => {
     const el = document.createElement("div");
     el.className = "scrub-chapter";
@@ -400,8 +387,10 @@ document.addEventListener("DOMContentLoaded", () => {
     return el;
   });
 
-  let scrubTarget = 0;   // where the scroll wants the video to be (0–1)
-  let scrubCurrent = 0;  // smoothed playhead
+  // ── Declare ALL scrub state vars here, before ScrollTrigger.create ──
+  let scrubTarget = 0;
+  let scrubCurrent = 0;
+  let scrubDirty = false;
   let activeChapter = -1;
   let introHidden = false;
   let scrubReady = false;
@@ -410,9 +399,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const loadingPct = document.querySelector(".scrub-loading-pct");
   const loadingBar = document.querySelector(".scrub-loading-line span");
 
-  // Scroll distance scales with the film's real length:
-  // ~85px of scroll per second of footage, clamped to sane limits.
-  // A 120s walkthrough gets ~10,200px of scroll — room to breathe.
   function getScrubDistance() {
     const d = scrubVideo.duration && isFinite(scrubVideo.duration) ? scrubVideo.duration : 90;
     return Math.round(Math.min(16000, Math.max(3500, d * 85)));
@@ -423,13 +409,13 @@ document.addEventListener("DOMContentLoaded", () => {
     start: "top top",
     end: () => "+=" + getScrubDistance(),
     pin: ".scrub-pin",
-    scrub: true,
+    scrub: 0.5,
     invalidateOnRefresh: true,
     onUpdate: (self) => {
+      scrubDirty = true;  // ← dirty flag set here
       scrubTarget = self.progress;
       progressFill.style.transform = `scaleX(${self.progress})`;
 
-      // Intro fades once the journey starts
       if (self.progress > 0.03 && !introHidden) {
         introHidden = true;
         gsap.to(".scrub-intro", { opacity: 0, y: -30, duration: 0.5, ease: "power2.out" });
@@ -438,7 +424,6 @@ document.addEventListener("DOMContentLoaded", () => {
         gsap.to(".scrub-intro", { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
       }
 
-      // Chapter switching — driven by the actual second in the film
       const dur = scrubVideo.duration && isFinite(scrubVideo.duration) ? scrubVideo.duration : 0;
       if (dur) {
         const t = self.progress * dur;
@@ -446,11 +431,9 @@ document.addEventListener("DOMContentLoaded", () => {
         for (let i = 0; i < CHAPTERS.length; i++) {
           if (t >= CHAPTERS[i].sec) idx = i;
         }
-        if (self.progress < 0.015) idx = -1; // nothing before the journey starts
-       if (idx !== activeChapter) {
-          // Kill ALL running chapter animations instantly before starting new ones
+        if (self.progress < 0.015) idx = -1;
+        if (idx !== activeChapter) {
           chapterEls.forEach((el) => gsap.killTweensOf(el));
-
           if (activeChapter >= 0) {
             gsap.set(chapterEls[activeChapter], { opacity: 0, y: -18 });
           }
@@ -468,32 +451,28 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   });
 
-  // Smooth the playhead toward the scroll target every tick.
-  // Lerping (instead of setting currentTime directly) is what makes
-  // the scrub feel cinematic instead of stuttery.
+  // ── Scrub ticker — only runs when dirty ──
   gsap.ticker.add(() => {
+    if (!scrubDirty) return;
     if (!scrubVideo.duration || scrubVideo.readyState < 2) return;
-       const diff = scrubTarget - scrubCurrent;
+
+    const diff = scrubTarget - scrubCurrent;
     const absDiff = Math.abs(diff);
 
-    // If the user scrolled a big chunk — snap instantly, no lerp
+    if (absDiff < 0.0005) { scrubDirty = false; return; }
+
     if (absDiff > 0.08) {
       scrubCurrent = scrubTarget;
     } else {
-      // Small movement — lerp smoothly
       scrubCurrent += diff * 0.08;
     }
 
     const t = scrubCurrent * scrubVideo.duration;
-    const gap = Math.abs(scrubVideo.currentTime - t);
-
-    // Only write to currentTime if it's actually moved enough to matter
-    if (gap > 0.016) {
+    if (Math.abs(scrubVideo.currentTime - t) > 0.016) {
       scrubVideo.currentTime = t;
     }
   });
 
-  // --- Buffering feedback: show how much of the film has arrived ---
   function updateScrubBuffer() {
     if (!scrubVideo.duration || !scrubVideo.buffered.length) return;
     const buffered = scrubVideo.buffered.end(scrubVideo.buffered.length - 1) / scrubVideo.duration;
@@ -507,26 +486,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   scrubVideo.addEventListener("progress", updateScrubBuffer);
   scrubVideo.addEventListener("loadeddata", updateScrubBuffer);
-
-  // The first frame can show as soon as ANY data exists — don't make
-  // the visitor stare at black while the rest buffers.
-  scrubVideo.addEventListener("loadeddata", () => {
-    scrubVideo.currentTime = 0.001;
-  });
-
-  // Once we know the real duration, rebuild the scroll distance to match.
-  scrubVideo.addEventListener("loadedmetadata", () => {
-    ScrollTrigger.refresh();
-  });
-
-  // Start buffering the full film as soon as the page is interactive —
-  // a 120s walkthrough needs the head start.
+  scrubVideo.addEventListener("loadeddata", () => { scrubVideo.currentTime = 0.001; });
+  scrubVideo.addEventListener("loadedmetadata", () => { ScrollTrigger.refresh(); });
   scrubVideo.preload = "auto";
   scrubVideo.load();
   scrubVideo.playbackRate = 0;
 
   // ===================================================================
-  // EXPLORE — generated isometric estate model
+  // EXPLORE — isometric estate model
   // ===================================================================
   const ISO = { cos: Math.cos(Math.PI / 6), sin: 0.5, s: 5.4, ox: 430, oy: 120 };
 
@@ -542,7 +509,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return `<polygon points="${pts}" fill="${fill}" ${extra}/>`;
   }
 
-  // Build the three visible faces of a box
   function isoBox(b) {
     const { x, y, w, d, h, z, c } = b;
     const At = isoPt(x, y, z + h), Bt = isoPt(x + w, y, z + h);
@@ -557,8 +523,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function buildIsoMap() {
     let svg = `<svg viewBox="0 0 960 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Interactive model of the Villa Chandrabhaga estate">`;
-
-    // Hillside terraces + access road (background, not interactive)
     svg += `<g class="iso-terrain">`;
     svg += isoBox({ x: -28, y: -20, w: 156, d: 108, h: 6, z: -15, c: C.hill2 });
     svg += isoBox({ x: -16, y: -12, w: 132, d: 92, h: 6, z: -9, c: C.hill });
@@ -566,12 +530,8 @@ document.addEventListener("DOMContentLoaded", () => {
     svg += isoBox({ x: -2, y: -2, w: 104, d: 5, h: 0.4, z: 0, c: { top: "#b8b3a8", left: "#9c978c", right: "#8d887e" } });
     svg += `</g>`;
 
-    // Interactive zones — every box drawn individually back-to-front so
-    // disjoint pieces of a zone (e.g. the barbeque pavilion) layer correctly.
     const allBoxes = [];
     ZONES.forEach((zone) => zone.boxes.forEach((b) => allBoxes.push({ zone, b })));
-    // Ground slabs (lawns, roads, decks, water) sit in a bottom layer sorted
-    // by their top height; buildings sort back-to-front above them.
     const isGround = (b) => b.z + b.h <= 2;
     allBoxes.sort((p, q) => {
       const gp = isGround(p.b), gq = isGround(q.b);
@@ -584,7 +544,6 @@ document.addEventListener("DOMContentLoaded", () => {
       svg += `<g class="iso-zone" data-zone="${zone.id}"><g class="iso-lift">${isoBox(b)}</g></g>`;
     });
 
-    // Pin markers — one per zone, above its tallest box, in a top layer
     ZONES.forEach((zone) => {
       let topMost = { X: 0, Y: Infinity };
       zone.boxes.forEach((b) => {
@@ -611,12 +570,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const cardVideoWrap = document.querySelector(".explore-card-film");
   const chipsWrap = document.querySelector(".explore-chips");
 
-  // Hide the preview frame gracefully if a clip is missing
-  cardVideo.addEventListener("error", () => {
-    cardVideoWrap.style.display = "none";
-  });
+  cardVideo.addEventListener("error", () => { cardVideoWrap.style.display = "none"; });
 
-  // Chips
   ZONES.forEach((zone) => {
     const chip = document.createElement("button");
     chip.className = "chip";
@@ -638,7 +593,6 @@ document.addEventListener("DOMContentLoaded", () => {
     cardDim.textContent = zone.dim;
     cardText.textContent = zone.text;
 
-    // Live film preview of this part of the estate
     if (zone.video) {
       const current = cardVideo.getAttribute("src");
       if (current !== zone.video) {
@@ -698,100 +652,110 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ===================================================================
-// INTERIOR SCRUB
-// ===================================================================
-const INTERIOR_CHAPTERS = [
-  { sec: 0,  title: "The Living Room", dim: "STONE \u00B7 GLASS \u00B7 NATURAL LIGHT" },
-  { sec: 24, title: "The Dining Area", dim: "OPEN PLAN \u00B7 RIVER VIEWS" },
-  { sec: 48, title: "The Interior",    dim: "VILLA CHANDRABHAGA \u00B7 RISHIKESH" },
-];
+  // INTERIOR SCRUB
+  // ===================================================================
+  const INTERIOR_CHAPTERS = [
+    { sec: 0,  title: "The Living Room", dim: "STONE \u00B7 GLASS \u00B7 NATURAL LIGHT" },
+    { sec: 24, title: "The Dining Area", dim: "OPEN PLAN \u00B7 RIVER VIEWS" },
+    { sec: 48, title: "The Interior",    dim: "VILLA CHANDRABHAGA \u00B7 RISHIKESH" },
+  ];
 
-const interiorVideo = document.querySelector(".interior-video");
-const interiorChaptersWrap = document.querySelector(".interior-chapters");
-const interiorIntro = document.querySelector(".interior-intro");
+  const interiorVideo = document.querySelector(".interior-video");
+  const interiorChaptersWrap = document.querySelector(".interior-chapters");
+  const interiorIntro = document.querySelector(".interior-intro");
 
-const interiorChapterEls = INTERIOR_CHAPTERS.map((ch) => {
-  const el = document.createElement("div");
-  el.className = "interior-chapter";
-  el.innerHTML = `<h3>${ch.title}</h3><p>${ch.dim}</p>`;
-  interiorChaptersWrap.appendChild(el);
-  return el;
-});
+  const interiorChapterEls = INTERIOR_CHAPTERS.map((ch) => {
+    const el = document.createElement("div");
+    el.className = "interior-chapter";
+    el.innerHTML = `<h3>${ch.title}</h3><p>${ch.dim}</p>`;
+    interiorChaptersWrap.appendChild(el);
+    return el;
+  });
 
-let interiorTarget = 0;
-let interiorCurrent = 0;
-let interiorActiveChapter = -1;
-let interiorIntroHidden = false;
+  // ── Declare ALL interior state vars here, before ScrollTrigger.create ──
+  let interiorTarget = 0;
+  let interiorCurrent = 0;
+  let interiorDirty = false;
+  let interiorActiveChapter = -1;
+  let interiorIntroHidden = false;
 
-ScrollTrigger.create({
-  trigger: ".interior",
-  start: "top top",
-  end: "+=6120",
-  pin: ".interior-pin",
-  scrub: true,
-  onUpdate: (self) => {
-    interiorTarget = self.progress;
+  ScrollTrigger.create({
+    trigger: ".interior",
+    start: "top top",
+    end: "+=6120",
+    pin: ".interior-pin",
+    scrub: 0.5,
+    onUpdate: (self) => {
+      interiorDirty = true;  // ← dirty flag set here
+      interiorTarget = self.progress;
 
-    if (self.progress > 0.03 && !interiorIntroHidden) {
-      interiorIntroHidden = true;
-      gsap.to(interiorIntro, { opacity: 0, y: -30, duration: 0.5, ease: "power2.out" });
-    } else if (self.progress <= 0.03 && interiorIntroHidden) {
-      interiorIntroHidden = false;
-      gsap.to(interiorIntro, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
+      if (self.progress > 0.03 && !interiorIntroHidden) {
+        interiorIntroHidden = true;
+        gsap.to(interiorIntro, { opacity: 0, y: -30, duration: 0.5, ease: "power2.out" });
+      } else if (self.progress <= 0.03 && interiorIntroHidden) {
+        interiorIntroHidden = false;
+        gsap.to(interiorIntro, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
+      }
+
+      const dur = interiorVideo.duration && isFinite(interiorVideo.duration) ? interiorVideo.duration : 0;
+      if (dur) {
+        const t = self.progress * dur;
+        let idx = 0;
+        for (let i = 0; i < INTERIOR_CHAPTERS.length; i++) {
+          if (t >= INTERIOR_CHAPTERS[i].sec) idx = i;
+        }
+        if (self.progress < 0.015) idx = -1;
+
+        if (idx !== interiorActiveChapter) {
+          interiorChapterEls.forEach((el) => gsap.killTweensOf(el));
+          if (interiorActiveChapter >= 0) {
+            gsap.set(interiorChapterEls[interiorActiveChapter], { opacity: 0, y: -18 });
+          }
+          if (idx >= 0) {
+            gsap.fromTo(
+              interiorChapterEls[idx],
+              { opacity: 0, y: 24 },
+              { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }
+            );
+          }
+          interiorActiveChapter = idx;
+        }
+      }
+    },
+  });
+
+  // ── Interior ticker — only runs when dirty ──
+  gsap.ticker.add(() => {
+    if (!interiorDirty) return;
+    if (!interiorVideo.duration || interiorVideo.readyState < 2) return;
+
+    const diff = interiorTarget - interiorCurrent;
+    const absDiff = Math.abs(diff);
+
+    if (absDiff < 0.0005) { interiorDirty = false; return; }
+
+    if (absDiff > 0.08) {
+      interiorCurrent = interiorTarget;
+    } else {
+      interiorCurrent += diff * 0.08;
     }
 
-    const dur = interiorVideo.duration && isFinite(interiorVideo.duration) ? interiorVideo.duration : 0;
-    if (dur) {
-      const t = self.progress * dur;
-      let idx = 0;
-      for (let i = 0; i < INTERIOR_CHAPTERS.length; i++) {
-        if (t >= INTERIOR_CHAPTERS[i].sec) idx = i;
-      }
-      if (self.progress < 0.015) idx = -1;
-
-      if (idx !== interiorActiveChapter) {
-        interiorChapterEls.forEach((el) => gsap.killTweensOf(el));
-        if (interiorActiveChapter >= 0) {
-          gsap.set(interiorChapterEls[interiorActiveChapter], { opacity: 0, y: -18 });
-        }
-        if (idx >= 0) {
-          gsap.fromTo(
-            interiorChapterEls[idx],
-            { opacity: 0, y: 24 },
-            { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }
-          );
-        }
-        interiorActiveChapter = idx;
-      }
+    const t = interiorCurrent * interiorVideo.duration;
+    if (Math.abs(interiorVideo.currentTime - t) > 0.016) {
+      interiorVideo.currentTime = t;
     }
-  },
-});
+  });
 
-gsap.ticker.add(() => {
-  if (!interiorVideo.duration || interiorVideo.readyState < 2) return;
-  const diff = interiorTarget - interiorCurrent;
-  if (Math.abs(diff) > 0.08) {
-    interiorCurrent = interiorTarget;
-  } else {
-    interiorCurrent += diff * 0.08;
-  }
-  const t = interiorCurrent * interiorVideo.duration;
-  if (Math.abs(interiorVideo.currentTime - t) > 0.016) {
-    interiorVideo.currentTime = t;
-  }
-});
-
-interiorVideo.addEventListener("loadeddata", () => { interiorVideo.currentTime = 0.001; });
-interiorVideo.addEventListener("loadedmetadata", () => { ScrollTrigger.refresh(); });
-interiorVideo.preload = "auto";
-interiorVideo.load();
-interiorVideo.playbackRate = 0;
+  interiorVideo.addEventListener("loadeddata", () => { interiorVideo.currentTime = 0.001; });
+  interiorVideo.addEventListener("loadedmetadata", () => { ScrollTrigger.refresh(); });
+  interiorVideo.preload = "auto";
+  interiorVideo.load();
+  interiorVideo.playbackRate = 0;
 
   // ===================================================================
   // FILMS — horizontal cinema reel
   // ===================================================================
   const filmsTrack = document.querySelector(".films-track");
-
   const getFilmsDistance = () => filmsTrack.scrollWidth - window.innerWidth + 128;
 
   gsap.to(filmsTrack, {
@@ -807,14 +771,12 @@ interiorVideo.playbackRate = 0;
     },
   });
 
-  // Play film videos only while visible (saves GPU with 10 videos)
-const filmObserver = new IntersectionObserver(
+  const filmObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         const video = entry.target.querySelector("video");
         if (!video) return;
         if (entry.isIntersecting) {
-          // Only set src and load when it comes into view
           if (!video.src && video.dataset.src) {
             video.src = video.dataset.src;
             video.load();
@@ -825,21 +787,18 @@ const filmObserver = new IntersectionObserver(
         }
       });
     },
-    { threshold: 0.1, rootMargin: "0px 200px 0px 200px" },
+    { threshold: 0.1, rootMargin: "0px 100px 0px 100px" },
   );
   document.querySelectorAll(".film-card").forEach((card) => filmObserver.observe(card));
 
-  // If a film is missing or unplayable, show a styled placeholder
-  // instead of a black hole — the reel keeps its rhythm.
- document.querySelectorAll(".film-card").forEach((card) => {
+  document.querySelectorAll(".film-card").forEach((card) => {
     const video = card.querySelector("video");
     const frame = card.querySelector(".film-frame");
     const no = card.querySelector(".film-no");
     if (!video || !frame) return;
     video.addEventListener("error", () => {
-      // Only show error if it's not a Cloudinary URL (ignore lazy-load false positives)
       const src = video.getAttribute("src") || video.getAttribute("data-src") || "";
-      if (src.includes("[cloudinary.com](https://cloudinary.com)")) return;
+      if (src.includes("cloudinary.com")) return;
       const name = src.split("/").pop();
       frame.classList.add("missing");
       frame.innerHTML = `<p>FILM ${no ? no.textContent : ""} \u2014 ADD ${name.toUpperCase()}</p>`;
@@ -847,7 +806,7 @@ const filmObserver = new IntersectionObserver(
   });
 
   // ===================================================================
-  // PLAN / CTA reveals
+  // PLAN / CTA
   // ===================================================================
   gsap.from(".plan-frame", {
     y: 60,
@@ -895,38 +854,22 @@ const filmObserver = new IntersectionObserver(
   document.querySelectorAll(".open-enquiry").forEach((btn) => btn.addEventListener("click", openPanel));
   closeBtn.addEventListener("click", closePanel);
   backdrop.addEventListener("click", closePanel);
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closePanel();
-  });
+  window.addEventListener("keydown", (e) => { if (e.key === "Escape") closePanel(); });
 
-panel.querySelector(".submit-btn").addEventListener("click", async () => {
+  panel.querySelector(".submit-btn").addEventListener("click", async () => {
     const first = panel.querySelector(".f-first").value.trim();
     const last = panel.querySelector(".f-last").value.trim();
     const email = panel.querySelector(".f-email").value.trim();
     const phone = panel.querySelector(".f-phone").value.trim();
 
-    if (first.length < 2 || last.length < 2) {
-      errorEl.textContent = "Please enter your first and last name.";
-      return;
-    }
-    if (!email.includes("@")) {
-      errorEl.textContent = "Please enter a valid email address.";
-      return;
-    }
-    if (phone.length < 6) {
-      errorEl.textContent = "Please enter a valid phone number.";
-      return;
-    }
+    if (first.length < 2 || last.length < 2) { errorEl.textContent = "Please enter your first and last name."; return; }
+    if (!email.includes("@")) { errorEl.textContent = "Please enter a valid email address."; return; }
+    if (phone.length < 6) { errorEl.textContent = "Please enter a valid phone number."; return; }
 
     const res = await fetch("https://formspree.io/f/mdavqjvz", {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
-      body: JSON.stringify({
-        name: `${first} ${last}`,
-        email: email,
-        phone: phone,
-        message: "New enquiry for The Chandrabhaga"
-      })
+      body: JSON.stringify({ name: `${first} ${last}`, email, phone, message: "New enquiry for The Chandrabhaga" })
     });
 
     if (res.ok) {
@@ -938,7 +881,7 @@ panel.querySelector(".submit-btn").addEventListener("click", async () => {
   });
 
   // ===================================================================
-  // Resize — refresh triggers (films distance is functional, recalcs)
+  // RESIZE
   // ===================================================================
   let resizeTimer;
   window.addEventListener("resize", () => {
@@ -952,4 +895,3 @@ panel.querySelector(".submit-btn").addEventListener("click", async () => {
     killPreloader();
   }
 });
-
