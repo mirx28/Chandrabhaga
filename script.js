@@ -101,7 +101,7 @@ const ZONES = [
     id: "motorcourt", chip: "Arrival", no: "Zone 01 \u2014 The Approach",
     name: "Arrival & Motor Court", dim: "GUEST & STAFF ENTRY \u00B7 PRIVATE PARKING",
     text: "The drive winds in from the eastern corner \u2014 a brick-lined walkway, private parking and the entrance to the main residence.",
-    video: "https://res.cloudinary.com/dt2sv5b0g/video/upload/v1781946572/walkthrough_aunkll.mp4",
+    video: "https://res.cloudinary.com/dt2sv5b0g/video/upload/v1782559793/walkthrough_1080p_el7oxt.mp4",
     boxes: [
       { x: 54, y: 56, w: 48, d: 6, h: 0.5, z: 0, c: C.dark },
       { x: 54, y: 62.5, w: 48, d: 1.8, h: 0.3, z: 0, c: C.deck },
@@ -114,7 +114,7 @@ const ZONES = [
     id: "mainvilla", chip: "Main Villa", no: "Zone 02 \u2014 The Main Residence",
     name: "Villa Chandrabhaga", dim: "LOUNGE & DINING \u00B7 KITCHEN \u00B7 SUITES",
     text: "The principal residence \u2014 a courtyard composition of living spaces, the wood-fired kitchen and bedroom suites, wrapped around the pool garden.",
-    video: "https://res.cloudinary.com/dt2sv5b0g/video/upload/v1781946572/walkthrough_aunkll.mp4",
+    video: "https://res.cloudinary.com/dt2sv5b0g/video/upload/v1782559793/walkthrough_1080p_el7oxt.mp4",
     boxes: [
       { x: 58, y: 8, w: 12, d: 26, h: 13, z: 0, c: C.white },
       { x: 58, y: 8, w: 12, d: 26, h: 1, z: 13, c: C.stone },
