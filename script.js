@@ -856,7 +856,7 @@ document.addEventListener("DOMContentLoaded", () => {
   backdrop.addEventListener("click", closePanel);
   window.addEventListener("keydown", (e) => { if (e.key === "Escape") closePanel(); });
 
-  panel.querySelector(".submit-btn").addEventListener("click", async () => {
+  panel.querySelector(".submit-btn").addEventListener("click", () => {
     const first = panel.querySelector(".f-first").value.trim();
     const last = panel.querySelector(".f-last").value.trim();
     const email = panel.querySelector(".f-email").value.trim();
@@ -866,24 +866,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!email.includes("@")) { errorEl.textContent = "Please enter a valid email address."; return; }
     if (phone.length < 6) { errorEl.textContent = "Please enter a valid phone number."; return; }
 
-    const res = await fetch("https://formspree.io/f/mdavqjvz", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Accept": "application/json" },
-      body: JSON.stringify({ name: `${first} ${last}`, email, phone, message: "New enquiry for The Chandrabhaga" })
-    });
+    const msg = encodeURIComponent(
+      `New enquiry from ${first} ${last}\nEmail: ${email}\nPhone: ${phone}\nProperty: The Chandrabhaga, Rishikesh`
+    );
+    window.open(`https://wa.me/917505091761?text=${msg}`, "_blank");
 
-    if (res.ok) {
-      formContent.style.display = "none";
-      thankyou.classList.add("show");
-
-      // WhatsApp notification
-      const msg = encodeURIComponent(
-        `New enquiry from ${first} ${last}\nEmail: ${email}\nPhone: ${phone}\nProperty: The Chandrabhaga, Rishikesh`
-      );
-      window.open(`https://wa.me/917505091761?text=${msg}`, "_blank");
-    } else {
-      errorEl.textContent = "Something went wrong. Please try again.";
-    }
+    formContent.style.display = "none";
+    thankyou.classList.add("show");
   });
 
   // ===================================================================
