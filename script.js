@@ -452,26 +452,22 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ── Scrub ticker — only runs when dirty ──
-  gsap.ticker.add(() => {
-    if (!scrubDirty) return;
-    if (!scrubVideo.duration || scrubVideo.readyState < 2) return;
+ // ── Scrub ticker — only runs when dirty ──
+gsap.ticker.add(() => {
+  if (!scrubDirty) return;
+  if (!scrubVideo.duration || scrubVideo.readyState < 2) return;
 
-    const diff = scrubTarget - scrubCurrent;
-    const absDiff = Math.abs(diff);
+  const diff = scrubTarget - scrubCurrent;
+  if (Math.abs(diff) < 0.0004) { scrubDirty = false; return; }
 
-    if (absDiff < 0.0005) { scrubDirty = false; return; }
+  // Continuous lerp — no hard snap, so direction changes never jump
+  scrubCurrent += diff * 0.18;
 
-    if (absDiff > 0.08) {
-      scrubCurrent = scrubTarget;
-    } else {
-      scrubCurrent += diff * 0.08;
-    }
-
-    const t = scrubCurrent * scrubVideo.duration;
-    if (Math.abs(scrubVideo.currentTime - t) > 0.016) {
-      scrubVideo.currentTime = t;
-    }
-  });
+  const t = scrubCurrent * scrubVideo.duration;
+  if (Math.abs(scrubVideo.currentTime - t) > 0.01) {
+    scrubVideo.currentTime = t;
+  }
+});
 
   function updateScrubBuffer() {
     if (!scrubVideo.duration || !scrubVideo.buffered.length) return;
@@ -490,7 +486,8 @@ document.addEventListener("DOMContentLoaded", () => {
   scrubVideo.addEventListener("loadedmetadata", () => { ScrollTrigger.refresh(); });
   scrubVideo.preload = "auto";
   scrubVideo.load();
-  scrubVideo.playbackRate = 0;
+  scrubVideo.playbackRate = 1;
+scrubVideo.pause();
 
   // ===================================================================
   // EXPLORE — isometric estate model
@@ -750,7 +747,9 @@ document.addEventListener("DOMContentLoaded", () => {
   interiorVideo.addEventListener("loadedmetadata", () => { ScrollTrigger.refresh(); });
   interiorVideo.preload = "auto";
   interiorVideo.load();
-  interiorVideo.playbackRate = 0;
+  interiorVideo.preload = "auto";
+interiorVideo.load();
+interiorVideo.pause();
 
   // ===================================================================
   // FILMS — horizontal cinema reel
@@ -869,7 +868,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const msg = encodeURIComponent(
       `New enquiry from ${first} ${last}\nEmail: ${email}\nPhone: ${phone}\nProperty: The Chandrabhaga, Rishikesh`
     );
-    window.open(`https://wa.me/917505091761?text=${msg}`, "_blank");
+    window.open(`https://wa.me/918439950401?text=${msg}`, "_blank");
 
     formContent.style.display = "none";
     thankyou.classList.add("show");
