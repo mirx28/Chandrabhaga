@@ -101,7 +101,7 @@ const ZONES = [
     id: "motorcourt", chip: "Arrival", no: "Zone 01 \u2014 The Approach",
     name: "Arrival & Motor Court", dim: "GUEST & STAFF ENTRY \u00B7 PRIVATE PARKING",
     text: "The drive winds in from the eastern corner \u2014 a brick-lined walkway, private parking and the entrance to the main residence.",
-    video: "https://res.cloudinary.com/dt2sv5b0g/video/upload/v1781946572/walkthrough_aunkll.mp4",
+    video: "https://github.com/mirx28/vid/releases/download/v1.0.0/walkthrough.mp4",
     boxes: [
       { x: 54, y: 56, w: 48, d: 6, h: 0.5, z: 0, c: C.dark },
       { x: 54, y: 62.5, w: 48, d: 1.8, h: 0.3, z: 0, c: C.deck },
@@ -114,7 +114,7 @@ const ZONES = [
     id: "mainvilla", chip: "Main Villa", no: "Zone 02 \u2014 The Main Residence",
     name: "Villa Chandrabhaga", dim: "LOUNGE & DINING \u00B7 KITCHEN \u00B7 SUITES",
     text: "The principal residence \u2014 a courtyard composition of living spaces, the wood-fired kitchen and bedroom suites, wrapped around the pool garden.",
-    video: "https://res.cloudinary.com/dt2sv5b0g/video/upload/v1781946572/walkthrough_aunkll.mp4",
+    video: "https://github.com/mirx28/vid/releases/download/v1.0.0/walkthrough.mp4",
     boxes: [
       { x: 58, y: 8, w: 12, d: 26, h: 13, z: 0, c: C.white },
       { x: 58, y: 8, w: 12, d: 26, h: 1, z: 13, c: C.stone },
@@ -126,7 +126,7 @@ const ZONES = [
     id: "pool", chip: "Pool", no: "Zone 03 \u2014 The Pool Garden",
     name: "The Swimming Pool", dim: "34'-2\" \u00D7 15'-0\" \u00B7 COURTYARD POOL",
     text: "Set inside the courtyard of the main residence \u2014 the pool garden, sheltered by the buildings around it.",
-    video: "https://res.cloudinary.com/dt2sv5b0g/video/upload/v1781604119/video6_eyycgj.mp4",
+    video: "https://github.com/mirx28/vid/releases/download/v1.0.0/video6.mp4",
     boxes:[
       { x: 74, y: 16, w: 16, d: 16, h: 1, z: 0, c: C.deck },
       { x: 77, y: 18, w: 9, d: 11, h: 0.8, z: 1, c: C.water },
@@ -136,7 +136,7 @@ const ZONES = [
     id: "courtyard", chip: "Courtyard Villa", no: "Zone 04 \u2014 Residence One",
     name: "The Courtyard Villa", dim: "STONE & GLASS \u00B7 THREE FLOORS",
     text: "Residence One \u2014 the highest of the three hillside villas, beside the stepping-stone path.",
-    video: "https://res.cloudinary.com/dt2sv5b0g/video/upload/v1781604100/video1_rcvrak.mp4",
+    video: "https://github.com/mirx28/vid/releases/download/v1.0.0/video1.mp4",
     boxes: [
       { x: 6, y: 4, w: 13, d: 11, h: 9, z: 0, c: C.white },
       { x: 6, y: 4, w: 13, d: 11, h: 0.8, z: 9, c: C.stone },
@@ -146,7 +146,7 @@ const ZONES = [
     id: "garden", chip: "Garden Villa", no: "Zone 05 \u2014 Residence Two",
     name: "The Garden Villa", dim: "LAWN ASPECT \u00B7 PRIVATE TERRACES",
     text: "Residence Two \u2014 the middle villa of the cluster, opening onto the central lawn.",
-    video: "https://res.cloudinary.com/dt2sv5b0g/video/upload/v1781604122/video9_hw5mys.mp4",
+    video: "https://github.com/mirx28/vid/releases/download/v1.0.0/video9.mp4",
     boxes: [
       { x: 15, y: 14, w: 13, d: 11, h: 8, z: 0, c: C.stone },
       { x: 15, y: 14, w: 13, d: 11, h: 0.8, z: 8, c: C.white },
@@ -156,7 +156,7 @@ const ZONES = [
     id: "hillside", chip: "Hillside Villa", no: "Zone 06 \u2014 Residence Three",
     name: "The Hillside Villa", dim: "VALLEY VIEWS \u00B7 ROOF TERRACE",
     text: "Residence Three \u2014 the lowest of the cluster, set against the slope with views down the valley.",
-    video: "https://res.cloudinary.com/dt2sv5b0g/video/upload/v1781604125/video8_yym5zt.mp4",
+    video: "https://github.com/mirx28/vid/releases/download/v1.0.0/video8.mp4",
     boxes: [
       { x: 7, y: 23, w: 13, d: 11, h: 8.5, z: 0, c: C.white },
       { x: 7, y: 23, w: 13, d: 11, h: 0.8, z: 8.5, c: C.stone },
@@ -166,7 +166,7 @@ const ZONES = [
     id: "amenities", chip: "Spa & Barbeque", no: "Zone 07 \u2014 Leisure Wing",
     name: "Barbeque, Spa & Gym", dim: "SPA \u00B7 GYM \u00B7 BARBEQUE PAVILION",
     text: "The green-roofed spa and gym pavilions at the rear of the complex, with the barbeque pavilion at its front corner.",
-    video: "https://res.cloudinary.com/dt2sv5b0g/video/upload/v1781604125/video7_vlau32.mp4",
+    video: "https://github.com/mirx28/vid/releases/download/v1.0.0/video7.mp4",
     boxes: [
       { x: 74, y: 4, w: 11, d: 12, h: 6, z: 0, c: C.stone },
       { x: 74, y: 4, w: 11, d: 12, h: 1, z: 6, c: C.sage },
@@ -179,7 +179,7 @@ const ZONES = [
     id: "lawns", chip: "Lawns", no: "Zone 08 \u2014 The Grounds",
     name: "Lawns & Pathways", dim: "LUSH LAWNS \u00B7 POND \u00B7 PATHWAYS",
     text: "The open heart of the estate \u2014 the great lawn between the villas and the main residence, with its pond and winding stone paths.",
-    video: "https://res.cloudinary.com/dt2sv5b0g/video/upload/v1781604128/video10_ckxwe4.mp4",
+    video: "https://github.com/mirx28/vid/releases/download/v1.0.0/video10.mp4",
     boxes: [
       { x: 30, y: 6, w: 20, d: 42, h: 0.8, z: 0, c: C.grass },
       { x: 42, y: 10, w: 6, d: 4, h: 0.6, z: 0.8, c: C.water },
@@ -452,22 +452,26 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ── Scrub ticker — only runs when dirty ──
- // ── Scrub ticker — only runs when dirty ──
-gsap.ticker.add(() => {
-  if (!scrubDirty) return;
-  if (!scrubVideo.duration || scrubVideo.readyState < 2) return;
+  gsap.ticker.add(() => {
+    if (!scrubDirty) return;
+    if (!scrubVideo.duration || scrubVideo.readyState < 2) return;
 
-  const diff = scrubTarget - scrubCurrent;
-  if (Math.abs(diff) < 0.0004) { scrubDirty = false; return; }
+    const diff = scrubTarget - scrubCurrent;
+    const absDiff = Math.abs(diff);
 
-  // Continuous lerp — no hard snap, so direction changes never jump
-  scrubCurrent += diff * 0.18;
+    if (absDiff < 0.0005) { scrubDirty = false; return; }
 
-  const t = scrubCurrent * scrubVideo.duration;
-  if (Math.abs(scrubVideo.currentTime - t) > 0.01) {
-    scrubVideo.currentTime = t;
-  }
-});
+    if (absDiff > 0.08) {
+      scrubCurrent = scrubTarget;
+    } else {
+      scrubCurrent += diff * 0.08;
+    }
+
+    const t = scrubCurrent * scrubVideo.duration;
+    if (Math.abs(scrubVideo.currentTime - t) > 0.016) {
+      scrubVideo.currentTime = t;
+    }
+  });
 
   function updateScrubBuffer() {
     if (!scrubVideo.duration || !scrubVideo.buffered.length) return;
@@ -486,8 +490,7 @@ gsap.ticker.add(() => {
   scrubVideo.addEventListener("loadedmetadata", () => { ScrollTrigger.refresh(); });
   scrubVideo.preload = "auto";
   scrubVideo.load();
-  scrubVideo.playbackRate = 1;
-scrubVideo.pause();
+  scrubVideo.playbackRate = 0;
 
   // ===================================================================
   // EXPLORE — isometric estate model
@@ -747,9 +750,7 @@ scrubVideo.pause();
   interiorVideo.addEventListener("loadedmetadata", () => { ScrollTrigger.refresh(); });
   interiorVideo.preload = "auto";
   interiorVideo.load();
-  interiorVideo.preload = "auto";
-interiorVideo.load();
-interiorVideo.pause();
+  interiorVideo.playbackRate = 0;
 
   // ===================================================================
   // FILMS — horizontal cinema reel
@@ -797,7 +798,7 @@ interiorVideo.pause();
     if (!video || !frame) return;
     video.addEventListener("error", () => {
       const src = video.getAttribute("src") || video.getAttribute("data-src") || "";
-      if (src.includes("cloudinary.com")) return;
+      if (src.includes("github.com")) return;
       const name = src.split("/").pop();
       frame.classList.add("missing");
       frame.innerHTML = `<p>FILM ${no ? no.textContent : ""} \u2014 ADD ${name.toUpperCase()}</p>`;
@@ -868,7 +869,7 @@ interiorVideo.pause();
     const msg = encodeURIComponent(
       `New enquiry from ${first} ${last}\nEmail: ${email}\nPhone: ${phone}\nProperty: The Chandrabhaga, Rishikesh`
     );
-    window.open(`https://wa.me/918439950401?text=${msg}`, "_blank");
+    window.open(`https://wa.me/917505091761?text=${msg}`, "_blank");
 
     formContent.style.display = "none";
     thankyou.classList.add("show");
