@@ -101,7 +101,7 @@ const ZONES = [
     id: "motorcourt", chip: "Arrival", no: "Zone 01 \u2014 The Approach",
     name: "Arrival & Motor Court", dim: "GUEST & STAFF ENTRY \u00B7 PRIVATE PARKING",
     text: "The drive winds in from the eastern corner \u2014 a brick-lined walkway, private parking and the entrance to the main residence.",
-    video: "https://github.com/mirx28/vid/releases/download/v1.0.0/walkthrough.mp4",
+    video: "https://mirx28.github.io/chandrabhaga-videos/walkthrough.mp4",
     boxes: [
       { x: 54, y: 56, w: 48, d: 6, h: 0.5, z: 0, c: C.dark },
       { x: 54, y: 62.5, w: 48, d: 1.8, h: 0.3, z: 0, c: C.deck },
@@ -114,7 +114,7 @@ const ZONES = [
     id: "mainvilla", chip: "Main Villa", no: "Zone 02 \u2014 The Main Residence",
     name: "Villa Chandrabhaga", dim: "LOUNGE & DINING \u00B7 KITCHEN \u00B7 SUITES",
     text: "The principal residence \u2014 a courtyard composition of living spaces, the wood-fired kitchen and bedroom suites, wrapped around the pool garden.",
-    video: "https://github.com/mirx28/vid/releases/download/v1.0.0/walkthrough.mp4",
+    video: "https://mirx28.github.io/chandrabhaga-videos/walkthrough.mp4",
     boxes: [
       { x: 58, y: 8, w: 12, d: 26, h: 13, z: 0, c: C.white },
       { x: 58, y: 8, w: 12, d: 26, h: 1, z: 13, c: C.stone },
@@ -126,7 +126,7 @@ const ZONES = [
     id: "pool", chip: "Pool", no: "Zone 03 \u2014 The Pool Garden",
     name: "The Swimming Pool", dim: "34'-2\" \u00D7 15'-0\" \u00B7 COURTYARD POOL",
     text: "Set inside the courtyard of the main residence \u2014 the pool garden, sheltered by the buildings around it.",
-    video: "https://github.com/mirx28/vid/releases/download/v1.0.0/video6.mp4",
+    video: "https://mirx28.github.io/chandrabhaga-videos/video6.mp4",
     boxes:[
       { x: 74, y: 16, w: 16, d: 16, h: 1, z: 0, c: C.deck },
       { x: 77, y: 18, w: 9, d: 11, h: 0.8, z: 1, c: C.water },
@@ -136,7 +136,7 @@ const ZONES = [
     id: "courtyard", chip: "Courtyard Villa", no: "Zone 04 \u2014 Residence One",
     name: "The Courtyard Villa", dim: "STONE & GLASS \u00B7 THREE FLOORS",
     text: "Residence One \u2014 the highest of the three hillside villas, beside the stepping-stone path.",
-    video: "https://github.com/mirx28/vid/releases/download/v1.0.0/video1.mp4",
+    video: "https://mirx28.github.io/chandrabhaga-videos/video1.mp4",
     boxes: [
       { x: 6, y: 4, w: 13, d: 11, h: 9, z: 0, c: C.white },
       { x: 6, y: 4, w: 13, d: 11, h: 0.8, z: 9, c: C.stone },
@@ -146,7 +146,7 @@ const ZONES = [
     id: "garden", chip: "Garden Villa", no: "Zone 05 \u2014 Residence Two",
     name: "The Garden Villa", dim: "LAWN ASPECT \u00B7 PRIVATE TERRACES",
     text: "Residence Two \u2014 the middle villa of the cluster, opening onto the central lawn.",
-    video: "https://github.com/mirx28/vid/releases/download/v1.0.0/video9.mp4",
+    video: "https://mirx28.github.io/chandrabhaga-videos/video9.mp4",
     boxes: [
       { x: 15, y: 14, w: 13, d: 11, h: 8, z: 0, c: C.stone },
       { x: 15, y: 14, w: 13, d: 11, h: 0.8, z: 8, c: C.white },
@@ -156,7 +156,7 @@ const ZONES = [
     id: "hillside", chip: "Hillside Villa", no: "Zone 06 \u2014 Residence Three",
     name: "The Hillside Villa", dim: "VALLEY VIEWS \u00B7 ROOF TERRACE",
     text: "Residence Three \u2014 the lowest of the cluster, set against the slope with views down the valley.",
-    video: "https://github.com/mirx28/vid/releases/download/v1.0.0/video8.mp4",
+    video: "https://mirx28.github.io/chandrabhaga-videos/video8.mp4",
     boxes: [
       { x: 7, y: 23, w: 13, d: 11, h: 8.5, z: 0, c: C.white },
       { x: 7, y: 23, w: 13, d: 11, h: 0.8, z: 8.5, c: C.stone },
@@ -166,7 +166,7 @@ const ZONES = [
     id: "amenities", chip: "Spa & Barbeque", no: "Zone 07 \u2014 Leisure Wing",
     name: "Barbeque, Spa & Gym", dim: "SPA \u00B7 GYM \u00B7 BARBEQUE PAVILION",
     text: "The green-roofed spa and gym pavilions at the rear of the complex, with the barbeque pavilion at its front corner.",
-    video: "https://github.com/mirx28/vid/releases/download/v1.0.0/video7.mp4",
+    video: "https://mirx28.github.io/chandrabhaga-videos/video7.mp4",
     boxes: [
       { x: 74, y: 4, w: 11, d: 12, h: 6, z: 0, c: C.stone },
       { x: 74, y: 4, w: 11, d: 12, h: 1, z: 6, c: C.sage },
@@ -179,7 +179,7 @@ const ZONES = [
     id: "lawns", chip: "Lawns", no: "Zone 08 \u2014 The Grounds",
     name: "Lawns & Pathways", dim: "LUSH LAWNS \u00B7 POND \u00B7 PATHWAYS",
     text: "The open heart of the estate \u2014 the great lawn between the villas and the main residence, with its pond and winding stone paths.",
-    video: "https://github.com/mirx28/vid/releases/download/v1.0.0/video10.mp4",
+    video: "https://mirx28.github.io/chandrabhaga-videos/video10.mp4",
     boxes: [
       { x: 30, y: 6, w: 20, d: 42, h: 0.8, z: 0, c: C.grass },
       { x: 42, y: 10, w: 6, d: 4, h: 0.6, z: 0.8, c: C.water },
@@ -213,32 +213,10 @@ document.addEventListener("DOMContentLoaded", () => {
   try {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  function isLowPerformanceDevice() {
-    const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection || {};
-    const effectiveType = String(conn.effectiveType || "").toLowerCase();
-    return (
-      conn.saveData ||
-      effectiveType.includes("2g") ||
-      effectiveType.includes("slow-2g") ||
-      (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) ||
-      (navigator.deviceMemory && navigator.deviceMemory <= 2)
-    );
-  }
-
-  const safeScrub = !reduceMotion && !isLowPerformanceDevice();
-
   // ---- Smooth scroll ----
   let lenis = null;
   if (window.Lenis) {
-    lenis = new Lenis({
-      duration: 0.95,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      smoothTouch: true,
-      wheelMultiplier: 1.05,
-      touchMultiplier: 2,
-      lerp: 0.06,
-    });
+    lenis = new Lenis({ duration: 1.6, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
     lenis.on("scroll", ScrollTrigger.update);
     gsap.ticker.add((time) => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
@@ -410,81 +388,91 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ── Declare ALL scrub state vars here, before ScrollTrigger.create ──
+  let scrubTarget = 0;
+  let scrubCurrent = 0;
+  let scrubDirty = false;
   let activeChapter = -1;
   let introHidden = false;
   let scrubReady = false;
-  const supportsScrub = safeScrub;
 
   const loadingEl = document.querySelector(".scrub-loading");
   const loadingPct = document.querySelector(".scrub-loading-pct");
   const loadingBar = document.querySelector(".scrub-loading-line span");
-
-  function setVideoTime(video, time) {
-    if (!video.duration || video.readyState < 2) return;
-    const clamped = Math.max(0, Math.min(video.duration, time));
-    if (Math.abs(video.currentTime - clamped) > 0.05) {
-      video.currentTime = clamped;
-    }
-  }
 
   function getScrubDistance() {
     const d = scrubVideo.duration && isFinite(scrubVideo.duration) ? scrubVideo.duration : 90;
     return Math.round(Math.min(16000, Math.max(3500, d * 85)));
   }
 
-  if (supportsScrub) {
-    ScrollTrigger.create({
-      trigger: ".scrub",
-      start: "top top",
-      end: () => "+=" + getScrubDistance(),
-      pin: ".scrub-pin",
-      scrub: 0,
-      invalidateOnRefresh: true,
-      onUpdate: (self) => {
-        progressFill.style.transform = `scaleX(${self.progress})`;
+  ScrollTrigger.create({
+    trigger: ".scrub",
+    start: "top top",
+    end: () => "+=" + getScrubDistance(),
+    pin: ".scrub-pin",
+    scrub: 0.5,
+    invalidateOnRefresh: true,
+    onUpdate: (self) => {
+      scrubDirty = true;  // ← dirty flag set here
+      scrubTarget = self.progress;
+      progressFill.style.transform = `scaleX(${self.progress})`;
 
-        if (self.progress > 0.03 && !introHidden) {
-          introHidden = true;
-          gsap.to(".scrub-intro", { opacity: 0, y: -30, duration: 0.5, ease: "power2.out" });
-        } else if (self.progress <= 0.03 && introHidden) {
-          introHidden = false;
-          gsap.to(".scrub-intro", { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
-        }
+      if (self.progress > 0.03 && !introHidden) {
+        introHidden = true;
+        gsap.to(".scrub-intro", { opacity: 0, y: -30, duration: 0.5, ease: "power2.out" });
+      } else if (self.progress <= 0.03 && introHidden) {
+        introHidden = false;
+        gsap.to(".scrub-intro", { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
+      }
 
-        const dur = scrubVideo.duration && isFinite(scrubVideo.duration) ? scrubVideo.duration : 0;
-        if (dur) {
-          const t = self.progress * dur;
-          setVideoTime(scrubVideo, t);
-          let idx = 0;
-          for (let i = 0; i < CHAPTERS.length; i++) {
-            if (t >= CHAPTERS[i].sec) idx = i;
-          }
-          if (self.progress < 0.015) idx = -1;
-          if (idx !== activeChapter) {
-            chapterEls.forEach((el) => gsap.killTweensOf(el));
-            if (activeChapter >= 0) {
-              gsap.set(chapterEls[activeChapter], { opacity: 0, y: -18 });
-            }
-            if (idx >= 0) {
-              gsap.fromTo(
-                chapterEls[idx],
-                { opacity: 0, y: 24 },
-                { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" },
-              );
-              progressLabel.textContent = `CHAPTER ${String(idx + 1).padStart(2, "0")} / ${String(CHAPTERS.length).padStart(2, "0")} — ${CHAPTERS[idx].title.toUpperCase()}`;
-            }
-            activeChapter = idx;
-          }
+      const dur = scrubVideo.duration && isFinite(scrubVideo.duration) ? scrubVideo.duration : 0;
+      if (dur) {
+        const t = self.progress * dur;
+        let idx = 0;
+        for (let i = 0; i < CHAPTERS.length; i++) {
+          if (t >= CHAPTERS[i].sec) idx = i;
         }
-      },
-    });
-  } else {
-    loadingEl.style.display = "none";
-    progressFill.style.transform = "scaleX(1)";
-    progressLabel.textContent = "WALKTHROUGH VIDEO";
-    scrubVideo.loop = true;
-    scrubVideo.addEventListener("loadeddata", () => { scrubVideo.currentTime = 0.001; scrubVideo.play().catch(() => {}); });
-  }
+        if (self.progress < 0.015) idx = -1;
+        if (idx !== activeChapter) {
+          chapterEls.forEach((el) => gsap.killTweensOf(el));
+          if (activeChapter >= 0) {
+            gsap.set(chapterEls[activeChapter], { opacity: 0, y: -18 });
+          }
+          if (idx >= 0) {
+            gsap.fromTo(
+              chapterEls[idx],
+              { opacity: 0, y: 24 },
+              { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" },
+            );
+            progressLabel.textContent = `CHAPTER ${String(idx + 1).padStart(2, "0")} / ${String(CHAPTERS.length).padStart(2, "0")} \u2014 ${CHAPTERS[idx].title.toUpperCase()}`;
+          }
+          activeChapter = idx;
+        }
+      }
+    },
+  });
+
+  // ── Scrub ticker — only runs when dirty ──
+  gsap.ticker.add(() => {
+    if (!scrubDirty) return;
+    if (!scrubVideo.duration || scrubVideo.readyState < 2) return;
+
+    const diff = scrubTarget - scrubCurrent;
+    const absDiff = Math.abs(diff);
+
+    if (absDiff < 0.0005) { scrubDirty = false; return; }
+
+    if (absDiff > 0.08) {
+      scrubCurrent = scrubTarget;
+    } else {
+      scrubCurrent += diff * 0.08;
+    }
+
+    const t = scrubCurrent * scrubVideo.duration;
+    if (Math.abs(scrubVideo.currentTime - t) > 0.016) {
+      scrubVideo.currentTime = t;
+    }
+  });
+
   function updateScrubBuffer() {
     if (!scrubVideo.duration || !scrubVideo.buffered.length) return;
     const buffered = scrubVideo.buffered.end(scrubVideo.buffered.length - 1) / scrubVideo.duration;
@@ -502,7 +490,7 @@ document.addEventListener("DOMContentLoaded", () => {
   scrubVideo.addEventListener("loadedmetadata", () => { ScrollTrigger.refresh(); });
   scrubVideo.preload = "auto";
   scrubVideo.load();
-  scrubVideo.playbackRate = supportsScrub ? 0 : 1;
+  scrubVideo.playbackRate = 0;
 
   // ===================================================================
   // EXPLORE — isometric estate model
@@ -685,62 +673,84 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ── Declare ALL interior state vars here, before ScrollTrigger.create ──
+  let interiorTarget = 0;
+  let interiorCurrent = 0;
+  let interiorDirty = false;
   let interiorActiveChapter = -1;
   let interiorIntroHidden = false;
 
-  if (safeScrub) {
-    ScrollTrigger.create({
-      trigger: ".interior",
-      start: "top top",
-      end: "+=6120",
-      pin: ".interior-pin",
-      scrub: 0,
-      onUpdate: (self) => {
-        if (self.progress > 0.03 && !interiorIntroHidden) {
-          interiorIntroHidden = true;
-          gsap.to(interiorIntro, { opacity: 0, y: -30, duration: 0.5, ease: "power2.out" });
-        } else if (self.progress <= 0.03 && interiorIntroHidden) {
-          interiorIntroHidden = false;
-          gsap.to(interiorIntro, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
-        }
+  ScrollTrigger.create({
+    trigger: ".interior",
+    start: "top top",
+    end: "+=6120",
+    pin: ".interior-pin",
+    scrub: 0.5,
+    onUpdate: (self) => {
+      interiorDirty = true;  // ← dirty flag set here
+      interiorTarget = self.progress;
 
-        const dur = interiorVideo.duration && isFinite(interiorVideo.duration) ? interiorVideo.duration : 0;
-        if (dur) {
-          const t = self.progress * dur;
-          setVideoTime(interiorVideo, t);
-          let idx = 0;
-          for (let i = 0; i < INTERIOR_CHAPTERS.length; i++) {
-            if (t >= INTERIOR_CHAPTERS[i].sec) idx = i;
-          }
-          if (self.progress < 0.015) idx = -1;
+      if (self.progress > 0.03 && !interiorIntroHidden) {
+        interiorIntroHidden = true;
+        gsap.to(interiorIntro, { opacity: 0, y: -30, duration: 0.5, ease: "power2.out" });
+      } else if (self.progress <= 0.03 && interiorIntroHidden) {
+        interiorIntroHidden = false;
+        gsap.to(interiorIntro, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
+      }
 
-          if (idx !== interiorActiveChapter) {
-            interiorChapterEls.forEach((el) => gsap.killTweensOf(el));
-            if (interiorActiveChapter >= 0) {
-              gsap.set(interiorChapterEls[interiorActiveChapter], { opacity: 0, y: -18 });
-            }
-            if (idx >= 0) {
-              gsap.fromTo(
-                interiorChapterEls[idx],
-                { opacity: 0, y: 24 },
-                { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }
-              );
-            }
-            interiorActiveChapter = idx;
-          }
+      const dur = interiorVideo.duration && isFinite(interiorVideo.duration) ? interiorVideo.duration : 0;
+      if (dur) {
+        const t = self.progress * dur;
+        let idx = 0;
+        for (let i = 0; i < INTERIOR_CHAPTERS.length; i++) {
+          if (t >= INTERIOR_CHAPTERS[i].sec) idx = i;
         }
-      },
-    });
-  } else {
-    interiorVideo.loop = true;
-    interiorVideo.addEventListener("loadeddata", () => { interiorVideo.currentTime = 0.001; interiorVideo.play().catch(() => {}); });
-  }
+        if (self.progress < 0.015) idx = -1;
+
+        if (idx !== interiorActiveChapter) {
+          interiorChapterEls.forEach((el) => gsap.killTweensOf(el));
+          if (interiorActiveChapter >= 0) {
+            gsap.set(interiorChapterEls[interiorActiveChapter], { opacity: 0, y: -18 });
+          }
+          if (idx >= 0) {
+            gsap.fromTo(
+              interiorChapterEls[idx],
+              { opacity: 0, y: 24 },
+              { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }
+            );
+          }
+          interiorActiveChapter = idx;
+        }
+      }
+    },
+  });
+
+  // ── Interior ticker — only runs when dirty ──
+  gsap.ticker.add(() => {
+    if (!interiorDirty) return;
+    if (!interiorVideo.duration || interiorVideo.readyState < 2) return;
+
+    const diff = interiorTarget - interiorCurrent;
+    const absDiff = Math.abs(diff);
+
+    if (absDiff < 0.0005) { interiorDirty = false; return; }
+
+    if (absDiff > 0.08) {
+      interiorCurrent = interiorTarget;
+    } else {
+      interiorCurrent += diff * 0.08;
+    }
+
+    const t = interiorCurrent * interiorVideo.duration;
+    if (Math.abs(interiorVideo.currentTime - t) > 0.016) {
+      interiorVideo.currentTime = t;
+    }
+  });
 
   interiorVideo.addEventListener("loadeddata", () => { interiorVideo.currentTime = 0.001; });
   interiorVideo.addEventListener("loadedmetadata", () => { ScrollTrigger.refresh(); });
   interiorVideo.preload = "auto";
   interiorVideo.load();
-  interiorVideo.playbackRate = safeScrub ? 0 : 1;
+  interiorVideo.playbackRate = 0;
 
   // ===================================================================
   // FILMS — horizontal cinema reel
